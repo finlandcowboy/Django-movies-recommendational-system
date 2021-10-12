@@ -1,38 +1,9 @@
 from os import error
 from bs4 import BeautifulSoup
 import requests
+import proxies
 
 
-proxies = [
-    {
-        'ip' : '190.107.224.150',
-        'port' : 3128
-    },
-    {
-        'ip' : '79.160.233.21',
-        'port' : 8118
-    },
-    {
-        'ip' : '51.83.69.9',
-        'port' : 8118
-    },
-    {
-        'ip' : '185.216.231.13',
-        'port' : 8888
-    },
-    {
-        'ip' : '52.183.8.192',
-        'port' : 3128
-    },
-    {
-        'ip' : '31.148.96.50',
-        'port' : 3128
-    },
-    {
-        'ip' : '167.114.96.27',
-        'port' : 9300
-    }
-]
 
 
 url = 'https://www.kinopoisk.ru/top/navigator/'
@@ -71,22 +42,21 @@ import time
 tryies = 10
 movie_urls = []
 
-def get_proxy(proxy):
-    return f"https://{proxy['ip']}:{proxy['port']}"
+
 
 global soup
 for page in tqdm(kinopoisk_pages):
-    for proxy in proxies:
+    for proxy in proxies.proxy_list:
         #print(f'Proxy: {proxy}')
-        resp = requests.get(page, proxies={'https:':get_proxy(proxy)})
+        resp = requests.get(page, proxies={'https:':proxies.get_proxy(proxy)})
         if resp.status_code != 200:
             #print(f'Error GET Code {resp.status_code}')
-            time.sleep(2)
+            time.sleep(0.1)
             continue
         soup = BeautifulSoup(resp.content, features='lxml')
         if 'робот' in soup.text:
             #print('Captcha Error')
-            time.sleep(2)
+            time.sleep(0.1)
             continue
         
         else:
