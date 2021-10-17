@@ -43,11 +43,14 @@ tryies = 10
 movie_urls = []
 
 
-
+print('Start Parsing...')
+print('Opening files...')
+movies_url_file = open('movies_url.txt', 'w')
+kinopoisk_rating_file = open('kinopoisk_rating.txt', 'w')
+print('Files opened!')
 global soup
 for page in tqdm(kinopoisk_pages):
-    movies_url_file = open('movies_url.txt', 'w')
-    kinopoisk_rating_file = open('kinopoisk_rating.txt', 'w')
+    print(f'Parsing page: {page}')
     for proxy in proxies.proxy_list:
         #print(f'Proxy: {proxy}')
         resp = requests.get(page, proxies={'https:':proxies.get_proxy(proxy)})
@@ -78,6 +81,6 @@ for page in tqdm(kinopoisk_pages):
         #kinopoisk_rating.append(movie_page.find('div', attrs={'numVote ratingGreenBG'}).find('span').text.split()[0])
         movies_url_file.write(base_url + movie_page.find_all('a')[0].get('href'))
         kinopoisk_rating_file.write(movie_page.find('div', attrs={'numVote ratingGreenBG'}).find('span').text.split()[0])
-        
+    print('Page succesfully parsed')
 
-
+print('Parsing succesfully complete!')
