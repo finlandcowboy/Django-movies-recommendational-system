@@ -46,6 +46,8 @@ movie_urls = []
 
 global soup
 for page in tqdm(kinopoisk_pages):
+    movies_url_file = open('movies_url.txt', 'w')
+    kinopoisk_rating_file = open('kinopoisk_rating.txt', 'w')
     for proxy in proxies.proxy_list:
         #print(f'Proxy: {proxy}')
         resp = requests.get(page, proxies={'https:':proxies.get_proxy(proxy)})
@@ -72,21 +74,10 @@ for page in tqdm(kinopoisk_pages):
         error_catcher.append(error_dict)
         continue
     for movie_page in movies_div.find_all('div', attrs={'class': 'item _NO_HIGHLIGHT_'}):
-        movie_urls.append(base_url + movie_page.find_all('a')[0].get('href'))
-        kinopoisk_rating.append(movie_page.find('div', attrs={'numVote ratingGreenBG'}).find('span').text.split()[0])
+        #movie_urls.append(base_url + movie_page.find_all('a')[0].get('href'))
+        #kinopoisk_rating.append(movie_page.find('div', attrs={'numVote ratingGreenBG'}).find('span').text.split()[0])
+        movies_url_file.write(base_url + movie_page.find_all('a')[0].get('href'))
+        kinopoisk_rating_file.write(movie_page.find('div', attrs={'numVote ratingGreenBG'}).find('span').text.split()[0])
         
-print(len(movie_urls))
-print(len(kinopoisk_rating))
 
-with(open('movies_url.txt'), 'w') as out:
-    for url in movie_urls:
-        out.write(f'{url}\n')
-
-with(open('kinopoisk_rating.txt'), 'w') as out:
-    for rating in kinopoisk_rating:
-        out.write(f'{rating}\n')
-
-with(open('error_log.txt'), 'w') as out:
-    for error in error_catcher:
-        out.write(f"Text: {error['text']}\nPage: {error['page']}\n\n")
 
