@@ -105,7 +105,7 @@ for metric in stat:
     print(f'{metric}: {stat[metric]}')
 
 with open('error.log', 'w') as out:
-    for key in error_catcher:
-        out.write(f'{key}: {error_catcher[key]}')
+    for key in error_dict:
+        out.write(f'{key}: {error_dict[key]}')
     out.write('\n')
 
