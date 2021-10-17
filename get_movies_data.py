@@ -13,6 +13,14 @@ FORMAT = '%(asctime)s %(message)s'
 logging.basicConfig(filename='get_movies_data.log', encoding='utf-8', level=logging.DEBUG, format=FORMAT, datefmt='%d/%m/%Y %I:%M:%S %p')
 
 
+
+'''
+
+Example: 
+
+'''
+
+
 def soup_none_log(attribute):
     if attribute is None:
         logging.debug(f'ERROR: Can\'t find movie {attribute}. Url: {url}. Output: {attribute}')

@@ -58,7 +58,7 @@ movies_url_file = open('movies_url.txt', 'w')
 kinopoisk_rating_file = open('kinopoisk_rating.txt', 'w')
 print('Files opened!')
 global soup
-for page in tqdm(kinopoisk_pages):
+for page in tqdm(kinopoisk_pages[:5]):
     print(f'Parsing page: {page}')
     for proxy in proxies.proxy_list:
         #print(f'Proxy: {proxy}')
@@ -103,3 +103,9 @@ print('Parsing succesfully complete!')
 
 for metric in stat:
     print(f'{metric}: {stat[metric]}')
+
+with open('error.log', 'w') as out:
+    for key in error_catcher:
+        out.write(f'{key}: {error_catcher[key]}')
+    out.write('\n')
+
