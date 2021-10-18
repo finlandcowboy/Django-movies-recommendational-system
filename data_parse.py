@@ -3,7 +3,9 @@ from bs4 import BeautifulSoup
 import requests
 import proxies
 
-
+import logging
+FORMAT = '%(asctime)s %(message)s'
+logging.basicConfig(filename='data_parse.log', format=FORMAT, encoding='utf-8', level=logging.DEBUG, datefmt='%d/%m/%Y %I:%M:%S %p')
 
 
 url = 'https://www.kinopoisk.ru/top/navigator/'
@@ -52,33 +54,33 @@ tryies = 10
 movie_urls = []
 
 
-print('Start Parsing...')
-print('Opening files...')
+logging.debug('Start Parsing...')
+logging.debug('Opening files...')
 movies_url_file = open('movies_url.txt', 'w')
 kinopoisk_rating_file = open('kinopoisk_rating.txt', 'w')
-print('Files opened!')
+logging.debug('Files opened!')
 global soup
 for page in tqdm(kinopoisk_pages[:5]):
-    print(f'Parsing page: {page}')
+    logging.debug(f'Parsing page: {page}')
     for proxy in proxies.proxy_list:
-        #print(f'Proxy: {proxy}')
+        #logging.debug(f'Proxy: {proxy}')
         resp = requests.get(page, proxies={'https:':proxies.get_proxy(proxy)})
         if resp.status_code != 200:
-            #print(f'Error GET Code {resp.status_code}')
-            time.sleep(0.1)
+            #logging.debug(f'Error GET Code {resp.status_code}')
+            time.sleep(0.01)
             stat['proxy_connection_error'] += 1
             continue
         soup = BeautifulSoup(resp.content, features='lxml')
-        if 'робот' in soup.text:
-            #print('Captcha Error')
-            time.sleep(0.1)
+        if 'робот' in soup.text.lower():
+            #logging.debug('Captcha Error')
+            time.sleep(0.01)
             stat['robot_error'] += 1
             continue
         
         else:
-            #print('Connection succesfull')
+            #logging.debug('Connection succesfull')
             break
-    print(f'Proxy {proxy} got connection')
+    logging.debug(f'Proxy {proxy} got connection')
     movies_div = soup.find('div', id='itemList')
     if movies_div is None:
         error_dict = {
@@ -91,21 +93,23 @@ for page in tqdm(kinopoisk_pages[:5]):
     for movie_page in movies_div.find_all('div', attrs={'class': 'item _NO_HIGHLIGHT_'}):
         #movie_urls.append(base_url + movie_page.find_all('a')[0].get('href'))
         #kinopoisk_rating.append(movie_page.find('div', attrs={'numVote ratingGreenBG'}).find('span').text.split()[0])
-        movies_url_file.write(base_url + movie_page.find_all('a')[0].get('href'))
+        movies_url_file.write(base_url + movie_page.find_all('a')[0].get('href') + '\n')
         if movie_page.find_all('a')[0].get('href'):
             stat['movie_urls_parsed'] += 1
-        kinopoisk_rating_file.write(movie_page.find('div', attrs={'numVote ratingGreenBG'}).find('span').text.split()[0])
+        kinopoisk_rating_file.write(movie_page.find('div', attrs={'numVote ratingGreenBG'}).find('span').text.split()[0]+ '\n')
         if movie_page.find('div', attrs={'numVote ratingGreenBG'}).find('span').text.split()[0]:
             stat['ratings_parsed'] += 1
-    print('Page succesfully parsed')
+    logging.debug('Page succesfully parsed')
 
-print('Parsing succesfully complete!')
+logging.debug('Parsing succesfully complete!')
 
 for metric in stat:
-    print(f'{metric}: {stat[metric]}')
+    logging.debug(f'{metric}: {stat[metric]}')
 
 with open('error.log', 'w') as out:
-    for key in error_dict:
-        out.write(f'{key}: {error_dict[key]}')
-    out.write('\n')
+    for error_dict in error_catcher:
+        for key in error_dict:
+            out.write(f'{key}: {error_dict[key]}')
+            out.write('\n')
+        out.write('\n')
 
