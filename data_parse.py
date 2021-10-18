@@ -70,8 +70,10 @@ for page in tqdm(kinopoisk_pages):
             time.sleep(0.01)
             stat['proxy_connection_error'] += 1
             continue
+
         soup = BeautifulSoup(resp.content, features='lxml')
-        if 'робот' in soup.text.lower() or soup.text.lower().startswith('ой') or resp.status_code==302:
+        if 'робот' in soup.text.lower() or soup.text.lower().startswith('ой') or resp.status_code==302 or resp.url != page:
+            print('1')
             logging.debug(f'Captcha Error: {soup.text}')
             time.sleep(0.01)
             stat['robot_error'] += 1
@@ -80,7 +82,9 @@ for page in tqdm(kinopoisk_pages):
         else:
             logging.debug('Connection succesfull')
             break
-    logging.debug(f'Proxy {proxy} got connection')
+
+    if not soup.find('div', attrs={'class': 'tenItems'}):
+        continue
 
     for movie_page in soup.find('div', attrs={'class': 'tenItems'}).find_all('div', attrs={'class' : 'item _NO_HIGHLIGHT_'}):
         #movie_urls.append(base_url + movie_page.find_all('a')[0].get('href'))
