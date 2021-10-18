@@ -1232,3 +1232,56 @@
 18/10/2021 01:18:43 PM kinopoisk_unknown_error: 5
 18/10/2021 01:18:43 PM movie_urls_parsed: 0
 18/10/2021 01:18:43 PM ratings_parsed: 0
+18/10/2021 11:31:58 PM Start Parsing...
+18/10/2021 11:31:58 PM Opening files...
+18/10/2021 11:31:58 PM Files opened!
+18/10/2021 11:31:58 PM Parsing page: https://www.kinopoisk.ru/top/navigator/m_act[num_vote]/100/m_act[rating]/1%3A/order/rating/page/1/#results
+18/10/2021 11:31:58 PM Proxy: {'ip': '190.107.224.150', 'port': 3128}
+18/10/2021 11:31:58 PM Starting new HTTPS connection (1): www.kinopoisk.ru:443
+18/10/2021 11:32:02 PM https://www.kinopoisk.ru:443 "GET /top/navigator/m_act%5Bnum_vote%5D/100/m_act%5Brating%5D/1%3A/order/rating/page/1/ HTTP/1.1" 200 None
+18/10/2021 11:32:02 PM Connection succesfull
+18/10/2021 11:32:02 PM Proxy {'ip': '190.107.224.150', 'port': 3128} got connection
+18/10/2021 11:32:38 PM Start Parsing...
+18/10/2021 11:32:38 PM Opening files...
+18/10/2021 11:32:38 PM Files opened!
+18/10/2021 11:32:38 PM Parsing page: https://www.kinopoisk.ru/top/navigator/m_act[num_vote]/100/m_act[rating]/1%3A/order/rating/page/1/#results
+18/10/2021 11:32:38 PM Proxy: {'ip': '190.107.224.150', 'port': 3128}
+18/10/2021 11:32:38 PM Starting new HTTPS connection (1): www.kinopoisk.ru:443
+18/10/2021 11:32:42 PM https://www.kinopoisk.ru:443 "GET /top/navigator/m_act%5Bnum_vote%5D/100/m_act%5Brating%5D/1%3A/order/rating/page/1/ HTTP/1.1" 200 None
+18/10/2021 11:32:42 PM Connection succesfull
+18/10/2021 11:32:42 PM Proxy {'ip': '190.107.224.150', 'port': 3128} got connection
+18/10/2021 11:32:42 PM Page succesfully parsed
+18/10/2021 11:32:42 PM Parsing page: https://www.kinopoisk.ru/top/navigator/m_act[num_vote]/100/m_act[rating]/1%3A/order/rating/page/2/#results
+18/10/2021 11:32:42 PM Proxy: {'ip': '190.107.224.150', 'port': 3128}
+18/10/2021 11:32:42 PM Starting new HTTPS connection (1): www.kinopoisk.ru:443
+18/10/2021 11:32:45 PM https://www.kinopoisk.ru:443 "GET /top/navigator/m_act%5Bnum_vote%5D/100/m_act%5Brating%5D/1%3A/order/rating/page/2/ HTTP/1.1" 200 None
+18/10/2021 11:32:46 PM Connection succesfull
+18/10/2021 11:32:46 PM Proxy {'ip': '190.107.224.150', 'port': 3128} got connection
+18/10/2021 11:32:46 PM Page succesfully parsed
+18/10/2021 11:32:46 PM Parsing page: https://www.kinopoisk.ru/top/navigator/m_act[num_vote]/100/m_act[rating]/1%3A/order/rating/page/3/#results
+18/10/2021 11:32:46 PM Proxy: {'ip': '190.107.224.150', 'port': 3128}
+18/10/2021 11:32:46 PM Starting new HTTPS connection (1): www.kinopoisk.ru:443
+18/10/2021 11:32:47 PM https://www.kinopoisk.ru:443 "GET /top/navigator/m_act%5Bnum_vote%5D/100/m_act%5Brating%5D/1%3A/order/rating/page/3/ HTTP/1.1" 200 None
+18/10/2021 11:32:48 PM Connection succesfull
+18/10/2021 11:32:48 PM Proxy {'ip': '190.107.224.150', 'port': 3128} got connection
+18/10/2021 11:32:48 PM Page succesfully parsed
+18/10/2021 11:32:48 PM Parsing page: https://www.kinopoisk.ru/top/navigator/m_act[num_vote]/100/m_act[rating]/1%3A/order/rating/page/4/#results
+18/10/2021 11:32:48 PM Proxy: {'ip': '190.107.224.150', 'port': 3128}
+18/10/2021 11:32:48 PM Starting new HTTPS connection (1): www.kinopoisk.ru:443
+18/10/2021 11:32:50 PM https://www.kinopoisk.ru:443 "GET /top/navigator/m_act%5Bnum_vote%5D/100/m_act%5Brating%5D/1%3A/order/rating/page/4/ HTTP/1.1" 200 None
+18/10/2021 11:32:51 PM Connection succesfull
+18/10/2021 11:32:51 PM Proxy {'ip': '190.107.224.150', 'port': 3128} got connection
+18/10/2021 11:32:51 PM Page succesfully parsed
+18/10/2021 11:32:51 PM Parsing page: https://www.kinopoisk.ru/top/navigator/m_act[num_vote]/100/m_act[rating]/1%3A/order/rating/page/5/#results
+18/10/2021 11:32:51 PM Proxy: {'ip': '190.107.224.150', 'port': 3128}
+18/10/2021 11:32:51 PM Starting new HTTPS connection (1): www.kinopoisk.ru:443
+18/10/2021 11:32:53 PM https://www.kinopoisk.ru:443 "GET /top/navigator/m_act%5Bnum_vote%5D/100/m_act%5Brating%5D/1%3A/order/rating/page/5/ HTTP/1.1" 200 None
+18/10/2021 11:32:53 PM Connection succesfull
+18/10/2021 11:32:53 PM Proxy {'ip': '190.107.224.150', 'port': 3128} got connection
+18/10/2021 11:32:53 PM Page succesfully parsed
+18/10/2021 11:32:53 PM Parsing succesfully complete!
+18/10/2021 11:32:53 PM robot_error: 0
+18/10/2021 11:32:53 PM proxy_connection_error: 0
+18/10/2021 11:32:53 PM kinopoisk_unknown_error: 0
+18/10/2021 11:32:53 PM movie_urls_parsed: 250
+18/10/2021 11:32:53 PM ratings_parsed: 250

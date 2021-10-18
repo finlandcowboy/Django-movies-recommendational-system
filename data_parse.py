@@ -63,37 +63,28 @@ global soup
 for page in tqdm(kinopoisk_pages[:5]):
     logging.debug(f'Parsing page: {page}')
     for proxy in proxies.proxy_list:
-        #logging.debug(f'Proxy: {proxy}')
+        logging.debug(f'Proxy: {proxy}')
         resp = requests.get(page, proxies={'https:':proxies.get_proxy(proxy)})
         if resp.status_code != 200:
-            #logging.debug(f'Error GET Code {resp.status_code}')
+            logging.debug(f'Error GET Code {resp.status_code}')
             time.sleep(0.01)
             stat['proxy_connection_error'] += 1
             continue
         soup = BeautifulSoup(resp.content, features='lxml')
         if 'робот' in soup.text.lower():
-            #logging.debug('Captcha Error')
+            logging.debug('Captcha Error')
             time.sleep(0.01)
             stat['robot_error'] += 1
             continue
         
         else:
-            #logging.debug('Connection succesfull')
+            logging.debug('Connection succesfull')
             break
     logging.debug(f'Proxy {proxy} got connection')
-    movies_div = soup.find('div', id='itemList')
-    if movies_div is None:
-        error_dict = {
-            'text' : soup.text,
-            'url' : page
-        }
-        error_catcher.append(error_dict)
-        stat['kinopoisk_unknown_error'] += 1
-        continue
-    for movie_page in movies_div.find_all('div', attrs={'class': 'item _NO_HIGHLIGHT_'}):
+    for movie_page in soup.find('div', attrs={'class': 'tenItems'}).find_all('div', attrs={'class' : 'item _NO_HIGHLIGHT_'}):
         #movie_urls.append(base_url + movie_page.find_all('a')[0].get('href'))
         #kinopoisk_rating.append(movie_page.find('div', attrs={'numVote ratingGreenBG'}).find('span').text.split()[0])
-        movies_url_file.write(base_url + movie_page.find_all('a')[0].get('href') + '\n')
+        movies_url_file.write(base_url + movie_page.find('a').get('href') + '\n')
         if movie_page.find_all('a')[0].get('href'):
             stat['movie_urls_parsed'] += 1
         kinopoisk_rating_file.write(movie_page.find('div', attrs={'numVote ratingGreenBG'}).find('span').text.split()[0]+ '\n')
@@ -112,4 +103,3 @@ with open('error.log', 'w') as out:
             out.write(f'{key}: {error_dict[key]}')
             out.write('\n')
         out.write('\n')
-
