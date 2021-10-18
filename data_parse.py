@@ -72,7 +72,7 @@ for page in tqdm(kinopoisk_pages):
             continue
         soup = BeautifulSoup(resp.content, features='lxml')
         if 'робот' in soup.text.lower() or soup.text.lower().startswith('ой') or resp.status_code==302:
-            logging.debug('Captcha Error')
+            logging.debug(f'Captcha Error: {soup.text}')
             time.sleep(0.01)
             stat['robot_error'] += 1
             continue
@@ -91,12 +91,13 @@ for page in tqdm(kinopoisk_pages):
         kinopoisk_rating_file.write(movie_page.find('div', attrs={'numVote ratingGreenBG'}).find('span').text.split()[0]+ '\n')
         if movie_page.find('div', attrs={'numVote ratingGreenBG'}).find('span').text.split()[0]:
             stat['ratings_parsed'] += 1
+    for metric in stat:
+        logging.debug(f'{metric}: {stat[metric]}')
     logging.debug('Page succesfully parsed')
 
 logging.debug('Parsing succesfully complete!')
 
-for metric in stat:
-    logging.debug(f'{metric}: {stat[metric]}')
+
 
 with open('error.log', 'w') as out:
     for error_dict in error_catcher:
