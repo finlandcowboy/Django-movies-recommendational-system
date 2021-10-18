@@ -61,7 +61,7 @@ kinopoisk_rating_file = open('kinopoisk_rating.txt', 'w')
 logging.debug('Files opened!')
 global soup
 for page in tqdm(kinopoisk_pages):
-    logging.debug(f'Parsing page: {page}')
+    logging.debug(f'Parsing page number {kinopoisk_pages.index(page)+1}')
     for proxy in proxies.proxy_list:
         logging.debug(f'Proxy: {proxy}')
         resp = requests.get(page, proxies={'https:':proxies.get_proxy(proxy)})
@@ -71,16 +71,17 @@ for page in tqdm(kinopoisk_pages):
             stat['proxy_connection_error'] += 1
             continue
         soup = BeautifulSoup(resp.content, features='lxml')
-        if 'робот' in soup.text.lower():
+        if 'робот' in soup.text.lower() or soup.text.lower().startswith('ой') or resp.status_code==302:
             logging.debug('Captcha Error')
             time.sleep(0.01)
             stat['robot_error'] += 1
             continue
-        
+
         else:
             logging.debug('Connection succesfull')
             break
     logging.debug(f'Proxy {proxy} got connection')
+
     for movie_page in soup.find('div', attrs={'class': 'tenItems'}).find_all('div', attrs={'class' : 'item _NO_HIGHLIGHT_'}):
         #movie_urls.append(base_url + movie_page.find_all('a')[0].get('href'))
         #kinopoisk_rating.append(movie_page.find('div', attrs={'numVote ratingGreenBG'}).find('span').text.split()[0])
