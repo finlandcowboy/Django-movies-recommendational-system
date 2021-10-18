@@ -5,7 +5,7 @@ import proxies
 
 import logging
 FORMAT = '%(asctime)s %(message)s'
-logging.basicConfig(filename='data_parse.log', format=FORMAT, encoding='utf-8', level=logging.DEBUG, datefmt='%d/%m/%Y %I:%M:%S %p')
+logging.basicConfig(filename='data_parse.log', format=FORMAT, level=logging.DEBUG, datefmt='%d/%m/%Y %I:%M:%S %p')
 
 
 url = 'https://www.kinopoisk.ru/top/navigator/'

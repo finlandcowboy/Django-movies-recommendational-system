@@ -10,7 +10,7 @@ movies_url = f.readlines()
 
 FORMAT = '%(asctime)s %(message)s'
 
-logging.basicConfig(filename='get_movies_data.log', encoding='utf-8', level=logging.DEBUG, format=FORMAT, datefmt='%d/%m/%Y %I:%M:%S %p')
+logging.basicConfig(filename='get_movies_data.log', level=logging.DEBUG, format=FORMAT, datefmt='%d/%m/%Y %I:%M:%S %p')
 
 
 
