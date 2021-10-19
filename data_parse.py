@@ -56,8 +56,8 @@ movie_urls = []
 
 logging.debug('Start Parsing...')
 logging.debug('Opening files...')
-movies_url_file = open('movies_url.txt', 'w')
-kinopoisk_rating_file = open('kinopoisk_rating.txt', 'w')
+movies_url_file = open('movies_url2.txt', 'w')
+kinopoisk_rating_file = open('kinopoisk_rating2.txt', 'w')
 logging.debug('Files opened!')
 global soup
 for page in tqdm(kinopoisk_pages):
