@@ -73,7 +73,6 @@ for page in tqdm(kinopoisk_pages):
 
         soup = BeautifulSoup(resp.content, features='lxml')
         if 'робот' in soup.text.lower() or soup.text.lower().startswith('ой') or resp.status_code==302 or resp.url != page:
-            print('1')
             logging.debug(f'Captcha Error: {soup.text}')
             time.sleep(0.01)
             stat['robot_error'] += 1
