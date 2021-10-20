@@ -3,11 +3,12 @@ from bs4 import BeautifulSoup
 import time 
 import proxies
 import random
+from tqdm import tqmd
 movie_end_url = []
 error_count = 0
-for page in range(5):
+for page in tqdm(range(5), desc='Page'):
     time.sleep(random.randint(0,10) * error_count)
-    for proxy in proxies.proxy_list:
+    for proxy in tqdm(proxies.proxy_list, desc='Proxy'):
         url = f'https://www.kinopoisk.ru/lists/top250/?page={page+1}&tab=all'
         print(url)
         resp = requests.get(url, proxies={'https:':proxies.get_proxy(proxy)})
