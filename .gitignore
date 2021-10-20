@@ -1,3 +1,5 @@
 .ipynb_checkpoints/
 /diplom/venv/
 /diplom/*.sqlite3
+data_parse.log
+/assets/
