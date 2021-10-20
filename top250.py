@@ -15,12 +15,12 @@ for page in range(5):
 
         if 'отправляли' in soup.text:
             error_count += 1
-            time.sleep(1 * (2**error_count))
+            time.sleep(1 * (1.05**error_count))
             continue
         
         if not soup.find('div', attrs={'class': 'selection-list'}):
             error_count += 1
-            time.sleep(1 * (2**error_count))
+            time.sleep(1 * (1.05**error_count))
             continue
 
         print(soup.text)
